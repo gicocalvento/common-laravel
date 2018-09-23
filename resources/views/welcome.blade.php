@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravels
+                    Laradock wtf!
                 </div>
 
                 <div class="links">
