@@ -79,7 +79,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laradock on Heroku!
+                    Laradock on Heroku! <br>
+                    Tested automatic deploys!
                 </div>
 
                 <div class="links">
