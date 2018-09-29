@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laradock wtf!
+                    Laradock on Heroku!
                 </div>
 
                 <div class="links">
