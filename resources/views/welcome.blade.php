@@ -80,7 +80,8 @@
             <div class="content">
                 <div class="title m-b-md">
                     Laradock on Heroku! <br>
-                    Tested automatic deploys!
+                    Tested automatic deploys!   
+                    Tested the pipeline!
                 </div>
 
                 <div class="links">
