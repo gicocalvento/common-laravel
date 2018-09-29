@@ -1,1 +1,1 @@
-web: cd laradock && docker-compose up -d nginx mysql
+web: vendor/bin/heroku-php-apache2 public/ Procfile
