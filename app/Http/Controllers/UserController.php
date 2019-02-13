@@ -12,51 +12,98 @@ use Kreait\Firebase\Database;
 
 class UserController extends Controller
 {
-    public function index(){
+
+    private $firebase;
+
+    /**
+    * Calculates sum of squares of an array
+    *
+    * Loops over each element in the array, squares it, and adds it to 
+    * total. Returns total.
+    * 
+    * This function can also be implemented using array_reduce();
+    * 
+    * @param array $arr
+    * @return int
+    * @throws Exception If element in array is not an integer
+    */
+    
+    public function __construct(){
 
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/common-api-config.json');
         $firebase = (new Factory)
-            ->withServiceAccount($serviceAccount)
+            ->withServiceAccount($serviceAccount)           
             ->create();
+        $this->firebase = $firebase;
 
-	$auth = $firebase->getAuth();
-	$users = $auth->listUsers();
-	$user = $auth->getUser('PT01uQpFYPbsn4y8hgTAIc4s2wJ2');
-	$list = [];
+    }
+
+    /**
+    * Calculates sum of squares of an array
+    *
+    * Loops over each element in the array, squares it, and adds it to 
+    * total. Returns total.
+    * 
+    * This function can also be implemented using array_reduce();
+    * 
+    * @param array $arr
+    * @return int
+    * @throws Exception If element in array is not an integer
+    */
+
+    public function index(){
+
+        $auth = $this->firebase->getAuth();
+        $users = $auth->listUsers();
+        $user = $auth->getUser('PT01uQpFYPbsn4y8hgTAIc4s2wJ2');
+        $list = [];
 
         foreach ($users as $user) {
-    		array_push($list,$user);
-	}   	
-	
+            array_push($list,$user);
+        }   	
+        
         return response()->json([
             'status'    => '200',
             'data'      => $list
-    	]);
+        ]);
         
     }
 
+    /**
+    * Calculates sum of squares of an array
+    *
+    * Loops over each element in the array, squares it, and adds it to 
+    * total. Returns total.
+    * 
+    * This function can also be implemented using array_reduce();
+    * 
+    * @param array $arr
+    * @return int
+    * @throws Exception If element in array is not an integer
+    */
+
     public function createUser(){
 
-	$serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/common-api-config.json');
-	$firebase = (new Factory)
-    		->withServiceAccount($serviceAccount)
-    		->create();
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/common-api-config.json');
+        $firebase = (new Factory)
+                ->withServiceAccount($serviceAccount)
+                ->create();
 
-	$auth = $firebase->getAuth();
+        $auth = $this->firebase->getAuth();
 
-	$userProperties = [
-    		'email' 	=> 'user@example.com',
-    		'emailVerified' => false,
-    		'phoneNumber' 	=> '+15555550100',
-    		'password' 	=> 'secretPassword',
-    		'displayName' 	=> 'John Doe',
-    		'photoUrl' 	=> 'http://www.example.com/12345678/photo.png',
-    		'disabled' 	=> false,
-	];
+        $userProperties = [
+                'email' 	=> 'user@example.com',
+                'emailVerified' => false,
+                'phoneNumber' 	=> '+15555550100',
+                'password' 	=> 'secretPassword',
+                'displayName' 	=> 'John Doe',
+                'photoUrl' 	=> 'http://www.example.com/12345678/photo.png',
+                'disabled' 	=> false,
+        ];
 
-	$createdUser = $auth->createUser($userProperties);
+        $createdUser = $auth->createUser($userProperties);
 
-	return response()->json([
+	    return response()->json([
             'status'    => '200',
             'data'      => $createdUser
     	]);
@@ -64,17 +111,24 @@ class UserController extends Controller
     
     }
 
+    /**
+    * Calculates sum of squares of an array
+    *
+    * Loops over each element in the array, squares it, and adds it to 
+    * total. Returns total.
+    * 
+    * This function can also be implemented using array_reduce();
+    * 
+    * @param array $arr
+    * @return int
+    * @throws Exception If element in array is not an integer
+    */
 
     public function loginUser(Request $request){
 
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/common-api-config.json');
-        $firebase = (new Factory)
-                ->withServiceAccount($serviceAccount)
-                ->create();
-
-        $auth = $firebase->getAuth();
+        $auth = $this->firebase->getAuth();
         $user = $auth->signInWithEmailAndPassword($request->email,$request->passwword);
-	$userInfo = $auth->getUserInfo($user->getUid());
+	    $userInfo = $auth->getUserInfo($user->getUid());
 
         return response()->json([
             'status'    => '200',

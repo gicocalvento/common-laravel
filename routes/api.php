@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/auth/login','UserController@loginUser');
+Route::get('/auth/verifyUserSessionToken/{token}','AuthController@verifyUserSessionToken');
 
